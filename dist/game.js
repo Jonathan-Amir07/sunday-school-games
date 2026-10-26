@@ -13,7 +13,7 @@ const pieces=[
 ];
 const byId=Object.fromEntries(pieces.map(p=>[p.id,p]));
 const board=document.getElementById('board'),tray=document.getElementById('tray'),feedback=document.getElementById('feedback');
-let selected=null,placed=new Set(),dragging=null;
+let selected=null,placed=new Set(),suppressClickUntil=0;
 const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
 function setFeedback(message,type=''){feedback.textContent=message;feedback.className='feedback '+type}
 function spriteStyle(p,width){const scale=width/p.w;return {width,height:p.h*scale,backgroundSize:`${IMAGE_WIDTH*scale}px ${IMAGE_HEIGHT*scale}px`,backgroundPosition:`-${p.x*scale}px -${p.y*scale}px`}}
@@ -22,9 +22,94 @@ let currentOrder=shuffle(pieces);
 function select(id){if(placed.has(id))return;selected=selected===id?null:id;render();if(selected)setFeedback(`Now find the place for ${byId[selected].name}.`);else setFeedback('Choose an icon to begin.')}
 function place(slotId){if(!selected){setFeedback('Choose an icon from below first.');return}if(placed.has(slotId))return;if(selected!==slotId){const slot=board.querySelector(`[data-id="${slotId}"]`);slot?.classList.add('wrong');setTimeout(()=>slot?.classList.remove('wrong'),400);setFeedback('Not quite. Look at the completed picture and try another place.','error');return}const p=byId[selected];placed.add(selected);selected=null;render();setFeedback(`Correct! ${p.fact}`,'success');if(placed.size===pieces.length)setTimeout(()=>document.getElementById('winDialog').showModal(),600)}
 function reset(){placed=new Set();selected=null;currentOrder=shuffle(pieces);render();setFeedback('Choose an icon to begin.');document.getElementById('winDialog').close()}
-function pointerStart(e,id){if(e.pointerType==='mouse'||placed.has(id))return;const origin=e.currentTarget;const sx=e.clientX,sy=e.clientY;let ghost=null;const move=ev=>{if(Math.hypot(ev.clientX-sx,ev.clientY-sy)<9&&!ghost)return;if(!ghost){ghost=origin.cloneNode(true);ghost.classList.add('drag-ghost');document.body.append(ghost);selected=id;origin.style.opacity='.35'}ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';const under=document.elementFromPoint(ev.clientX,ev.clientY)?.closest('.slot');board.querySelectorAll('.slot.targeted').forEach(s=>s.classList.remove('targeted'));under?.classList.add('targeted')};const end=ev=>{origin.removeEventListener('pointermove',move);origin.removeEventListener('pointerup',end);origin.removeEventListener('pointercancel',end);board.querySelectorAll('.slot.targeted').forEach(s=>s.classList.remove('targeted'));if(ghost){ghost.remove();origin.style.opacity='';const under=document.elementFromPoint(ev.clientX,ev.clientY)?.closest('.slot');if(under)place(under.dataset.id);else render()}};origin.setPointerCapture(e.pointerId);origin.addEventListener('pointermove',move);origin.addEventListener('pointerup',end);origin.addEventListener('pointercancel',end)}
+function pointerStart(e,id){
+  if(e.pointerType==='mouse'||placed.has(id))return;
+  const origin=e.currentTarget,sx=e.clientX,sy=e.clientY;
+  const boardScroll=document.getElementById('boardScroll');
+  let ghost=null,frame=0,x=sx,y=sy,moved=false;
+  const edgeSpeed=(position,size)=>{
+    const edge=96,maxSpeed=19;
+    position=Math.max(0,Math.min(size,position));
+    if(position<edge)return -maxSpeed*(1-position/edge);
+    if(position>size-edge)return maxSpeed*(1-(size-position)/edge);
+    return 0;
+  };
+  const highlight=()=>{
+    const under=document.elementFromPoint(x,y)?.closest('.slot');
+    board.querySelectorAll('.slot.targeted').forEach(slot=>slot.classList.remove('targeted'));
+    under?.classList.add('targeted');
+  };
+  const autoScroll=()=>{
+    if(!ghost)return;
+    const vertical=edgeSpeed(y,window.innerHeight);
+    if(vertical)window.scrollBy(0,vertical);
+    const bounds=boardScroll.getBoundingClientRect();
+    if(y>=bounds.top-24&&y<=bounds.bottom+24){
+      const horizontal=edgeSpeed(x-bounds.left,bounds.width);
+      if(horizontal)boardScroll.scrollLeft+=horizontal;
+    }
+    highlight();
+    frame=requestAnimationFrame(autoScroll);
+  };
+  const move=ev=>{
+    x=ev.clientX;y=ev.clientY;
+    if(Math.hypot(x-sx,y-sy)<9&&!ghost)return;
+    if(!ghost){
+      moved=true;
+      ghost=origin.cloneNode(true);
+      ghost.classList.add('drag-ghost');
+      document.body.append(ghost);
+      selected=id;
+      updateSelectionDock();
+      origin.style.opacity='.35';
+      document.documentElement.classList.add('is-dragging');
+      frame=requestAnimationFrame(autoScroll);
+    }
+    ghost.style.left=x+'px';ghost.style.top=y+'px';
+    highlight();
+  };
+  const end=ev=>{
+    origin.removeEventListener('pointermove',move);
+    origin.removeEventListener('pointerup',end);
+    origin.removeEventListener('pointercancel',end);
+    cancelAnimationFrame(frame);
+    document.documentElement.classList.remove('is-dragging');
+    board.querySelectorAll('.slot.targeted').forEach(slot=>slot.classList.remove('targeted'));
+    if(moved){
+      suppressClickUntil=performance.now()+350;
+      ghost.remove();origin.style.opacity='';
+      if(ev.type==='pointercancel'){render();return}
+      const under=document.elementFromPoint(ev.clientX,ev.clientY)?.closest('.slot');
+      if(under)place(under.dataset.id);else render();
+    }
+  };
+  origin.setPointerCapture(e.pointerId);
+  origin.addEventListener('pointermove',move);
+  origin.addEventListener('pointerup',end);
+  origin.addEventListener('pointercancel',end);
+}
 document.getElementById('resetButton').addEventListener('click',reset);document.getElementById('playAgainButton').addEventListener('click',reset);
 const referenceDialog=document.getElementById('referenceDialog'),teacherDialog=document.getElementById('teacherDialog');
 document.getElementById('referenceButton').addEventListener('click',()=>referenceDialog.showModal());document.getElementById('winReferenceButton').addEventListener('click',()=>{document.getElementById('winDialog').close();referenceDialog.showModal()});document.getElementById('teacherButton').addEventListener('click',()=>teacherDialog.showModal());document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>b.closest('dialog').close()));document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.close()}));
 const gameUrl=location.origin+location.pathname;const link=document.getElementById('gameLink');link.href=gameUrl;link.textContent=gameUrl;document.getElementById('copyButton').addEventListener('click',async()=>{await navigator.clipboard.writeText(gameUrl);document.getElementById('copyButton').textContent='Copied!'});
+function updateSelectionDock(){
+  const dock=document.getElementById('selectionDock');
+  dock.hidden=!selected;
+  if(selected)document.getElementById('selectedName').textContent=byId[selected].name;
+}
+const baseRender=render;
+render=()=>{baseRender();updateSelectionDock()};
+const baseSelect=select;
+select=id=>{
+  if(performance.now()<suppressClickUntil)return;
+  baseSelect(id);
+  if(selected&&matchMedia('(max-width: 600px)').matches){
+    document.getElementById('boardScroll').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+};
+document.getElementById('changeSelection').addEventListener('click',()=>{
+  selected=null;
+  render();
+  tray.scrollIntoView({behavior:'smooth',block:'start'});
+});
 render();
