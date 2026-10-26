@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#342019">
+  <meta name="description" content="A classroom iconostasis matching game for children.">
+  <title>Iconostasis Match</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./game.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">✣</span><span>ICONOSTASIS <em>MATCH</em></span></div>
+    <button class="text-button" id="teacherButton" type="button">Teacher view <span aria-hidden="true">↗</span></button>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="pageTitle">
+      <div class="intro-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> A COPTIC CHURCH GAME</div>
+        <h1 id="pageTitle">Find each icon’s <i>place.</i></h1>
+        <p>Look at the completed iconostasis in your classroom. Then place the icons on the empty screen below.</p>
+        <div class="intro-actions">
+          <a class="primary-button" href="#game">Start matching <span aria-hidden="true">↓</span></a>
+          <button class="secondary-button" id="referenceButton" type="button">See the reference</button>
+        </div>
+      </div>
+      <div class="reference-preview" aria-label="Reference photograph of a completed Coptic iconostasis">
+        <img src="./assets/iconostasis-reference.jpg" alt="Completed illustrated Coptic iconostasis showing the Royal Door, icons, apostles, Last Supper, and Crucifixion" fetchpriority="high">
+        <span class="image-label">THE COMPLETED ICONOSTASIS <span aria-hidden="true">↗</span></span>
+      </div>
+    </section>
+
+    <section class="game-section" id="game" aria-labelledby="gameTitle">
+      <div class="section-heading">
+        <div><div class="eyebrow">THE MATCHING CHALLENGE</div><h2 id="gameTitle">Build the iconostasis</h2></div>
+        <div class="progress-block"><strong id="progressText">0 of 10 placed</strong><div class="progress-track"><span id="progressBar"></span></div></div>
+      </div>
+      <div class="instruction-bar"><span class="instruction-icon" aria-hidden="true">☝</span><span><b>Tap an icon below, then tap its place.</b> You can also drag an icon into place.</span><button id="resetButton" type="button">Start over</button></div>
+      <div class="board-outer"><div class="board-scroll" id="boardScroll"><div id="board" class="board" role="group" aria-label="Empty iconostasis with ten placement spaces"></div></div></div>
+      <p class="scroll-note">← Swipe to explore the whole iconostasis →</p>
+      <div class="tray-heading"><div><span class="eyebrow">YOUR ICONS</span><h3>Choose an icon</h3></div><span id="remainingText">10 icons remaining</span></div>
+      <div id="tray" class="tray" role="group" aria-label="Icons to place"></div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite">Choose an icon to begin.</div>
+    </section>
+
+    <section class="learn-section" aria-labelledby="learnTitle"><span class="eyebrow">DISCOVER THE MEANING</span><h2 id="learnTitle">A gateway between heaven and earth</h2><div class="learn-grid"><article><span>01</span><h3>The Royal Door</h3><p>The central door opens toward the altar. Its curtain is called the <i>Sitr</i>.</p></article><article><span>02</span><h3>Beside the door</h3><p>Mary is on the left as we face the screen. Christ is on the right.</p></article><article><span>03</span><h3>Above the door</h3><p>The Last Supper reminds us of communion, with the apostles gathered on both sides.</p></article><article><span>04</span><h3>At the summit</h3><p>The Golgotha scene shows the Crucifixion, with Mary and St. John nearby.</p></article></div></section>
+  </main>
+
+  <footer><span>ICONOSTASIS MATCH</span><span>Made for classroom learning · Coptic Orthodox tradition</span></footer>
+
+  <dialog id="referenceDialog" class="modal"><div class="modal-head"><div><span class="eyebrow">LOOK CLOSELY</span><h2>The completed iconostasis</h2></div><button class="close-button" type="button" data-close aria-label="Close reference">×</button></div><img src="./assets/iconostasis-reference.jpg" alt="Completed iconostasis reference"><p>The image is a learning reference. Church iconostasis details can vary by parish; this game follows the arrangement supplied for this lesson.</p></dialog>
+  <dialog id="teacherDialog" class="modal teacher-modal"><div class="modal-head"><div><span class="eyebrow">FOR THE CLASSROOM</span><h2>Share the game</h2></div><button class="close-button" type="button" data-close aria-label="Close teacher view">×</button></div><p>Project the reference picture above the class. Let children scan this code and complete the matching challenge on their phones.</p><div class="share-box"><img id="qrImage" src="./assets/classroom-qr.svg" alt="QR code linking to this game"><div><span class="eyebrow">GAME LINK</span><a id="gameLink" href="#"></a><button id="copyButton" class="secondary-button" type="button">Copy link</button></div></div><p class="teacher-note">The QR code opens this game link. Keep the class reference image visible while children play.</p></dialog>
+  <dialog id="winDialog" class="modal win-modal"><div class="win-symbol" aria-hidden="true">✣</div><span class="eyebrow">WELL DONE</span><h2>You completed the iconostasis!</h2><p>Every icon has its place. Take another look at the Royal Door, the Last Supper, the apostles, and the Golgotha scene.</p><div class="win-actions"><button id="playAgainButton" class="primary-button" type="button">Play again <span aria-hidden="true">↻</span></button><button id="winReferenceButton" class="secondary-button" type="button">View reference</button></div></dialog>
+</body>
+</html>
