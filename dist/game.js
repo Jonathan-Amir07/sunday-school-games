@@ -103,29 +103,6 @@ function decorateGameArtwork(){
     const url='url("./assets/'+p.asset+'")';
     const card=tray.querySelector('[data-id="'+p.id+'"] .piece-art');
     if(card){card.style.backgroundImage=url;card.style.backgroundSize='cover';card.style.backgroundPosition='center'}
-    if(placed.has(p.id)){
-      const slot=board.querySelector('[data-id="'+p.id+'"]');
-      slot.style.backgroundImage=url;
-      slot.style.backgroundSize='cover';
-      slot.style.backgroundPosition='center';
-      slot.style.borderRadius='42% 42% 0 0 / 17% 17% 0 0';
-    }
-  }
-}
-function decorateReference(){
-  for(const frame of document.querySelectorAll('.reference-art')){
-    for(const p of pieces.filter(piece=>piece.asset)){
-      const art=document.createElement('img');
-      art.className='reference-insert';
-      art.src='./assets/'+p.asset;
-      art.alt='';
-      art.setAttribute('aria-hidden','true');
-      art.style.left=(100*p.x/IMAGE_WIDTH)+'%';
-      art.style.top=(100*p.y/IMAGE_HEIGHT)+'%';
-      art.style.width=(100*p.w/IMAGE_WIDTH)+'%';
-      art.style.height=(100*p.h/IMAGE_HEIGHT)+'%';
-      frame.append(art);
-    }
   }
 }
 render=()=>{baseRender();decorateGameArtwork();updateSelectionDock()};
@@ -142,5 +119,4 @@ document.getElementById('changeSelection').addEventListener('click',()=>{
   render();
   tray.scrollIntoView({behavior:'smooth',block:'start'});
 });
-decorateReference();
 render();
