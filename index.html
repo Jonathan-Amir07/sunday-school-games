@@ -37,13 +37,15 @@
         <div><div class="eyebrow">THE MATCHING CHALLENGE</div><h2 id="gameTitle">Build the iconostasis</h2></div>
         <div class="progress-block"><strong id="progressText">0 of 10 placed</strong><div class="progress-track"><span id="progressBar"></span></div></div>
       </div>
-      <div class="instruction-bar"><span class="instruction-icon" aria-hidden="true">☝</span><span><b>Tap an icon below, then tap its place.</b> You can also drag an icon into place.</span><button id="resetButton" type="button">Start over</button></div>
+      <div class="instruction-bar"><span class="instruction-icon" aria-hidden="true">☝</span><span><b>Tap an icon below, then tap its place.</b> Or drag it upward; hold near the screen edge to scroll.</span><button id="resetButton" type="button">Start over</button></div>
       <div class="board-outer"><div class="board-scroll" id="boardScroll"><div id="board" class="board" role="group" aria-label="Empty iconostasis with ten placement spaces"></div></div></div>
       <p class="scroll-note">← Swipe to explore the whole iconostasis →</p>
       <div class="tray-heading"><div><span class="eyebrow">YOUR ICONS</span><h3>Choose an icon</h3></div><span id="remainingText">10 icons remaining</span></div>
       <div id="tray" class="tray" role="group" aria-label="Icons to place"></div>
       <div id="feedback" class="feedback" role="status" aria-live="polite">Choose an icon to begin.</div>
     </section>
+
+    <div id="selectionDock" class="selection-dock" hidden><span>SELECTED ICON</span><strong id="selectedName"></strong><button id="changeSelection" type="button">Change</button></div>
 
     <section class="learn-section" aria-labelledby="learnTitle"><span class="eyebrow">DISCOVER THE MEANING</span><h2 id="learnTitle">A gateway between heaven and earth</h2><div class="learn-grid"><article><span>01</span><h3>The Royal Door</h3><p>The central door opens toward the altar. Its curtain is called the <i>Sitr</i>.</p></article><article><span>02</span><h3>Beside the door</h3><p>Mary is on the left as we face the screen. Christ is on the right.</p></article><article><span>03</span><h3>Above the door</h3><p>The Last Supper reminds us of communion, with the apostles gathered on both sides.</p></article><article><span>04</span><h3>At the summit</h3><p>The Golgotha scene shows the Crucifixion, with Mary and St. John nearby.</p></article></div></section>
   </main>
