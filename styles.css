@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,500,0,1;9..144,600,0,1&display=swap');
 .is-dragging{scroll-behavior:auto}
+.reference-art{position:relative}
+.reference-art>img:first-child{display:block;width:100%}
+.reference-art .reference-insert{position:absolute;display:block;object-fit:cover;border-radius:42% 42% 0 0 / 17% 17% 0 0}
 .selection-dock[hidden]{display:none}
 .selection-dock{display:none}
 @media(max-width:600px){.selection-dock:not([hidden]){position:fixed;z-index:900;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;background:#fffaf1;border:2px solid #9d4933;box-shadow:0 8px 30px #28150b55;padding:10px 12px}.selection-dock span{font-size:9px;letter-spacing:.12em;color:#9d4933;font-weight:700}.selection-dock strong{font-size:12px;line-height:1.2;flex:1}.selection-dock button{font-size:11px;font-weight:700;color:#9d4933;background:none;border:0;text-decoration:underline}.is-dragging .drag-ghost{transform:translate(-50%,-108%)}}

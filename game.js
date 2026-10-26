@@ -1,10 +1,10 @@
 const IMAGE_WIDTH=1024, IMAGE_HEIGHT=681;
 const pieces=[
-  {id:'mark',name:'St. Mark the Evangelist',location:'Left outer panel',x:138,y:379,w:77,h:122,fact:'St. Mark, founder of the Church of Alexandria, has a place of honor on the left.'},
-  {id:'annunciation',name:'The Annunciation',location:'Left of Mary',x:239,y:379,w:82,h:122,fact:'The Annunciation shows Gabriel bringing Mary the news of the Incarnation.'},
+  {id:'mark',name:'St. Mark the Evangelist',location:'Left outer panel',x:138,y:379,w:77,h:122,asset:'st-mark-two-lions.webp',fact:'St. Mark is shown holding the Gospel with two lions beside him.'},
+  {id:'annunciation',name:'The Annunciation',location:'Left of Mary',x:239,y:379,w:82,h:122,asset:'annunciation-gabriel-mary.webp',fact:'Archangel Gabriel brings the Virgin Mary the message of the Incarnation.'},
   {id:'mary',name:'The Theotokos',location:'Beside the Royal Door · left',x:338,y:379,w:82,h:122,fact:'Mary holding the Christ Child stands immediately left of the Royal Door as we face it.'},
   {id:'christ',name:'Christ Pantocrator',location:'Beside the Royal Door · right',x:612,y:379,w:85,h:122,fact:'Christ stands immediately right of the Royal Door as we face it.'},
-  {id:'baptist',name:'St. John the Baptist',location:'Right of Christ',x:711,y:379,w:84,h:122,fact:'St. John the Baptist points toward Christ as His Forerunner and witness.'},
+  {id:'baptist',name:'St. John the Baptist',location:'Right of Christ',x:711,y:379,w:84,h:122,asset:'baptism-of-christ.webp',fact:'St. John baptises Jesus Christ in the Jordan River.'},
   {id:'george',name:'St. George',location:'Right outer panel',x:815,y:379,w:84,h:122,fact:'St. George is the patron saint shown on the outer right of this reference.'},
   {id:'apostlesLeft',name:'Six apostles · left',location:'Upper left register',x:138,y:223,w:278,h:78,fact:'The apostles flank the Last Supper, six on each side.'},
   {id:'supper',name:'The Last Supper',location:'Above the Royal Door',x:438,y:237,w:159,h:64,fact:'The Last Supper is centered directly above the Royal Door.'},
@@ -98,7 +98,37 @@ function updateSelectionDock(){
   if(selected)document.getElementById('selectedName').textContent=byId[selected].name;
 }
 const baseRender=render;
-render=()=>{baseRender();updateSelectionDock()};
+function decorateGameArtwork(){
+  for(const p of pieces.filter(piece=>piece.asset)){
+    const url='url("./assets/'+p.asset+'")';
+    const card=tray.querySelector('[data-id="'+p.id+'"] .piece-art');
+    if(card){card.style.backgroundImage=url;card.style.backgroundSize='cover';card.style.backgroundPosition='center'}
+    if(placed.has(p.id)){
+      const slot=board.querySelector('[data-id="'+p.id+'"]');
+      slot.style.backgroundImage=url;
+      slot.style.backgroundSize='cover';
+      slot.style.backgroundPosition='center';
+      slot.style.borderRadius='42% 42% 0 0 / 17% 17% 0 0';
+    }
+  }
+}
+function decorateReference(){
+  for(const frame of document.querySelectorAll('.reference-art')){
+    for(const p of pieces.filter(piece=>piece.asset)){
+      const art=document.createElement('img');
+      art.className='reference-insert';
+      art.src='./assets/'+p.asset;
+      art.alt='';
+      art.setAttribute('aria-hidden','true');
+      art.style.left=(100*p.x/IMAGE_WIDTH)+'%';
+      art.style.top=(100*p.y/IMAGE_HEIGHT)+'%';
+      art.style.width=(100*p.w/IMAGE_WIDTH)+'%';
+      art.style.height=(100*p.h/IMAGE_HEIGHT)+'%';
+      frame.append(art);
+    }
+  }
+}
+render=()=>{baseRender();decorateGameArtwork();updateSelectionDock()};
 const baseSelect=select;
 select=id=>{
   if(performance.now()<suppressClickUntil)return;
@@ -112,4 +142,5 @@ document.getElementById('changeSelection').addEventListener('click',()=>{
   render();
   tray.scrollIntoView({behavior:'smooth',block:'start'});
 });
+decorateReference();
 render();
