@@ -1,0 +1,19 @@
+.lang-toggle{flex:none;border:1px solid #c89c66;background:transparent;color:#f5dfc0;border-radius:3px;min-height:38px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.lang-toggle:hover{background:#51362a}.lang-toggle:focus-visible{outline:3px solid #e6b87b;outline-offset:3px}
+.topbar{gap:12px}.topbar .lang-toggle{margin-inline-start:auto}.topbar .topbar-actions .lang-toggle{margin-inline-start:0}
+.site-header{gap:12px}.site-header .lang-toggle{margin-inline-start:0}
+html[dir=rtl] body{font-family:Tahoma,Arial,sans-serif;line-height:1.6}
+html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] h3,html[dir=rtl] h4,html[dir=rtl] .lesson-card h3,html[dir=rtl] .event-copy h3,html[dir=rtl] .story-key b{font-family:Tahoma,Arial,sans-serif;letter-spacing:0;line-height:1.25}
+html[dir=rtl] .eyebrow,html[dir=rtl] .scripture,html[dir=rtl] .card-meta,html[dir=rtl] .brand,html[dir=rtl] .wordmark{letter-spacing:0}
+html[dir=rtl] .progress,html[dir=rtl] .progress-block{text-align:right}
+html[dir=rtl] .dialog-head,html[dir=rtl] .modal-head{text-align:right}
+html[dir=rtl] .reference-list{padding-right:24px;padding-left:0}
+html[dir=rtl] .board-scroll{direction:ltr}
+html[dir=rtl] .board .slot-inner{direction:rtl}
+html[dir=rtl] .instruction-bar button{margin-right:auto;margin-left:0}
+html[dir=rtl] .image-label{left:auto;right:22px}
+html[dir=rtl] .hero-image span{left:auto;right:22px}
+html[dir=rtl] .piece-location,html[dir=rtl] .piece-name{overflow-wrap:anywhere}
+html[dir=rtl] .story-card,html[dir=rtl] .choice,html[dir=rtl] .final-choices button{text-align:right}
+html[dir=rtl] .qr,html[dir=rtl] .game-link,html[dir=rtl] .student-link,html[dir=rtl] #gameLink,html[dir=rtl] #studentLink{direction:ltr;unicode-bidi:plaintext}
+@media(max-width:650px){.site-header .lang-toggle,.topbar .lang-toggle{font-size:11px;padding:6px 8px;min-height:34px}.site-header{gap:8px}.site-header .wordmark{min-width:0}.site-header .header-link{white-space:nowrap}.topbar{padding-inline:12px}.topbar .brand{min-width:0;font-size:10px}.topbar .top-action{white-space:nowrap}.topbar .topbar-actions{gap:8px}html[dir=rtl] .hero h1,html[dir=rtl] .intro h1{font-size:clamp(39px,10vw,59px)}html[dir=rtl] .lesson-card h3{font-size:25px}html[dir=rtl] .image-label{right:15px}}
