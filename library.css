@@ -11,3 +11,6 @@
 .lesson-card.featured{grid-column:span 3}.lesson-card.upcoming{grid-column:span 6;display:grid;grid-template-columns:250px 1fr}.lesson-card.upcoming .card-emblem{height:100%;min-height:240px}.lesson-card.upcoming .card-body{min-height:240px}
 @media(max-width:1000px){.lesson-card.featured{grid-column:span 1}.lesson-card.upcoming{grid-column:span 2}}
 @media(max-width:650px){.lesson-card.upcoming{display:block}.lesson-card.upcoming .card-emblem{height:150px;min-height:0}.lesson-card.upcoming .card-body{min-height:0}}
+.lesson-card.featured:last-child{grid-column:span 6;display:grid;grid-template-columns:1fr 1fr}.lesson-card.featured:last-child .card-image{height:auto;min-height:290px}.lesson-card.featured:last-child .card-body{justify-content:center}
+@media(max-width:1000px){.lesson-card.featured:last-child{grid-column:span 2}}
+@media(max-width:650px){.lesson-card.featured:last-child{display:block}.lesson-card.featured:last-child .card-image{height:220px;min-height:0}}
