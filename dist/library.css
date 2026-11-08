@@ -5,3 +5,6 @@
 .lesson-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.lesson-card.featured{grid-column:span 3;grid-template-columns:.95fr 1.05fr}.lesson-card.upcoming{grid-column:span 2}
 @media(max-width:1000px){.lesson-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-card.featured{grid-column:span 2}.lesson-card.upcoming{grid-column:span 1}}
 @media(max-width:650px){.lesson-grid{display:block}.lesson-card.featured{display:block}}
+.lesson-card.featured{grid-column:span 2;display:block;min-height:0}.lesson-card.featured .card-image{height:205px}.lesson-card.featured .card-body{min-height:260px}.lesson-card.upcoming{grid-column:span 3}
+@media(max-width:1000px){.lesson-card.featured,.lesson-card.upcoming{grid-column:span 1}}
+@media(max-width:650px){.lesson-card.featured .card-body{min-height:0}}

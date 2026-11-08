@@ -2,7 +2,8 @@ const qrDialog = document.getElementById('qrDialog');
 const studentLink = document.getElementById('studentLink');
 const games = {
   iconostasis: { title: 'The Iconostasis', lesson: '01', path: './', qr: './assets/classroom-qr.svg' },
-  jonathan: { title: 'Jonathan & David', lesson: '02', path: './jonathan-david.html', qr: './assets/jonathan-david-qr.svg' }
+  jonathan: { title: 'Jonathan & David', lesson: '02', path: './jonathan-david.html', qr: './assets/jonathan-david-qr.svg' },
+  timothy: { title: 'St. Timothy of Ansena', lesson: '03', path: './st-timothy.html', qr: './assets/st-timothy-qr.svg' }
 };
 let gameUrl = '';
 for (const button of document.querySelectorAll('[data-qr]')) button.addEventListener('click', () => {
