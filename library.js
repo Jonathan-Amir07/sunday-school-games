@@ -5,7 +5,8 @@ const games = {
   jonathan: { title: 'Jonathan & David', lesson: '02', path: './jonathan-david.html', qr: './assets/jonathan-david-qr.svg' },
   timothy: { title: 'St. Timothy of Ansena', lesson: '03', path: './st-timothy.html', qr: './assets/st-timothy-qr.svg' },
   respect: { title: 'Respect & Humility', lesson: '04', path: './respect-humility.html', qr: './assets/respect-humility-qr.svg' },
-  philopater: { title: 'St. Philopater Mercurius', lesson: '05', path: './st-philopater.html', qr: './assets/st-philopater-qr.svg' }
+  philopater: { title: 'St. Philopater Mercurius', lesson: '05', path: './st-philopater.html', qr: './assets/st-philopater-qr.svg' },
+  truefriend: { title: 'How to Choose a Friend', lesson: '06', path: './true-friend.html', qr: './assets/true-friend-qr.svg' }
 };
 let gameUrl = '';
 for (const button of document.querySelectorAll('[data-qr]')) button.addEventListener('click', () => {
