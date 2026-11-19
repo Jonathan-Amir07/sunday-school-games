@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#2b1d1b">
+  <meta name="description" content="Two interactive Coptic Orthodox Sunday school games about David and Jonathan: Pack the True Friend's Backpack and Zoom-In Mystery.">
+  <title>How to Choose a True Friend · Sunday School Games</title>
+  <link rel="stylesheet" href="./true-friend.css">
+  <link rel="stylesheet" href="./i18n.css">
+  <script defer src="./i18n.js"></script>
+  <script defer src="./i18n-runtime.js"></script>
+  <script defer src="./true-friend.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./library.html">
+      <span class="brand-cross" aria-hidden="true">✣</span>
+      <span>SUNDAY SCHOOL <b>GAMES</b></span>
+    </a>
+    <div class="topbar-actions">
+      <button id="soundToggleBtn" class="top-icon-btn" type="button" aria-label="Sound on/off" title="Toggle sound">
+        <span id="soundIcon">🔊</span>
+      </button>
+      <button id="teacherButton" class="top-action" type="button">Teacher view <span aria-hidden="true">↗</span></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- LANDING VIEW (Menu between Game 1 and Game 2) -->
+    <section id="landingView" class="view active-view" aria-labelledby="landingTitle">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">LESSON 06 · DAVID &amp; JONATHAN (1 SAMUEL 20–23)</span>
+          <h1 id="landingTitle">How to Choose a <em>True Friend.</em></h1>
+          <p>Jonathan loved David with a pure heart, kept his secrets, and helped him find courage in God. Explore what makes a faithful friend through two interactive classroom games!</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#gameModes">Choose a game <span aria-hidden="true">↓</span></a>
+            <button class="secondary-button" id="openVerseBtn" type="button">Memory verse <span aria-hidden="true">✦</span></button>
+          </div>
+          <span class="scripture">FROM 1 SAMUEL 20–23 · SIRACH 6:14</span>
+        </div>
+        <div class="hero-image">
+          <img src="./assets/jonathan-david-friendship.webp" alt="Jonathan offering his robe and armor to David" fetchpriority="high">
+          <span>DAVID &amp; JONATHAN · A COVENANT OF FRIENDSHIP</span>
+        </div>
+      </div>
+
+      <section class="virtue-strip" aria-label="Friendship pillars">
+        <div><span aria-hidden="true">✦</span><b>Honesty</b></div>
+        <div><span aria-hidden="true">✦</span><b>Genuine Love</b></div>
+        <div><span aria-hidden="true">✦</span><b>Loyalty &amp; Trust</b></div>
+        <div><span aria-hidden="true">✦</span><b>Spiritual Growth</b></div>
+      </section>
+
+      <section class="game-modes-section" id="gameModes" aria-labelledby="modesTitle">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">TWO CLASSROOM CHALLENGES</span>
+            <h2 id="modesTitle">Select your game</h2>
+            <p>Play on the big screen or on your phone. Test your friendship wisdom!</p>
+          </div>
+        </div>
+
+        <div class="mode-cards-grid">
+          <!-- Game 1 Card -->
+          <article class="mode-card">
+            <div class="mode-card-badge">GAME 1 · DRAG &amp; DROP</div>
+            <div class="mode-card-art backpack-preview-art">
+              <span class="mode-card-symbol">🎒</span>
+            </div>
+            <div class="mode-card-body">
+              <h3>Pack the True Friend's Backpack</h3>
+              <p>Sort through 10 friendship items. Pack the 7 green-flag virtues into the explorer backpack and beware of the 3 red-flag traps!</p>
+              <ul class="mode-features">
+                <li><span aria-hidden="true">✓</span> 7 Green flags (Honesty, Love, Secrets, Safety…)</li>
+                <li><span aria-hidden="true">⚠</span> 3 Red flag traps (Gossip, Bully, Distraction)</li>
+                <li><span aria-hidden="true">📱</span> Drag-and-drop or tap-to-pack</li>
+              </ul>
+              <button class="primary-button play-mode-btn" id="startBackpackBtn" type="button">
+                Play Game 1 <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Game 2 Card -->
+          <article class="mode-card">
+            <div class="mode-card-badge">GAME 2 · PROGRESSIVE REVEAL</div>
+            <div class="mode-card-art mystery-preview-art">
+              <span class="mode-card-symbol">🔍</span>
+            </div>
+            <div class="mode-card-body">
+              <h3>Zoom-In Mystery</h3>
+              <p>7 mystery rounds! Can you recognize the friendship symbols while heavily magnified? Use zoom hints wisely and deduce their biblical meaning.</p>
+              <ul class="mode-features">
+                <li><span aria-hidden="true">🔎</span> Extreme 350% magnification zoom</li>
+                <li><span aria-hidden="true">💡</span> "Zoom Out" hints with score deduction</li>
+                <li><span aria-hidden="true">🏆</span> 7 rounds of friendship detective work</li>
+              </ul>
+              <button class="primary-button play-mode-btn" id="startMysteryBtn" type="button">
+                Play Game 2 <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="takeaway">
+        <span class="takeaway-mark" aria-hidden="true">✣</span>
+        <div>
+          <span class="eyebrow">THE GOLDEN RULE OF FRIENDSHIP</span>
+          <h2>A true friend brings you closer to Christ.</h2>
+          <p>Jonathan was the king's son, yet he protected David, rejoiced in David's calling, and gave him courage in God. Choose friends who reflect truth, guard your dignity, and pray with you.</p>
+        </div>
+      </section>
+    </section>
+
+    <!-- GAME 1: PACK THE TRUE FRIEND'S BACKPACK -->
+    <section id="game1View" class="view hidden-view" aria-labelledby="backpackTitle">
+      <div class="game-nav-bar">
+        <button class="back-nav-btn" type="button" data-action="to-menu">
+          <span aria-hidden="true">←</span> Back to games
+        </button>
+        <div class="game-stat-group">
+          <div class="lives-pill" title="Lives remaining" aria-label="3 lives remaining">
+            <span class="stat-label">LIVES:</span>
+            <span id="livesContainer" class="lives-icons" aria-hidden="true">
+              <span class="heart active">♥</span>
+              <span class="heart active">♥</span>
+              <span class="heart active">♥</span>
+            </span>
+          </div>
+          <div class="progress-pill">
+            <strong id="backpackCount">0 / 7 Packed</strong>
+            <div class="progress-bar-track">
+              <div id="backpackProgressBar" class="progress-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-container">
+        <div class="game-header-copy">
+          <span class="eyebrow">GAME 1 · ADVENTURE PACKING</span>
+          <h2 id="backpackTitle">Pack the True Friend's Backpack</h2>
+          <p>Drag or tap the 7 good friendship virtues into the backpack. Avoid the 3 red flag traps!</p>
+        </div>
+
+        <div id="backpackBanner" class="trait-banner" role="status" aria-live="polite">
+          <span class="banner-icon">✣</span>
+          <span class="banner-text">Tap or drag an item below into the backpack.</span>
+        </div>
+
+        <div class="backpack-arena">
+          <!-- Item Cards Tray -->
+          <div class="items-tray-card">
+            <div class="tray-title">
+              <span>FRIENDSHIP ITEMS</span>
+              <span class="tray-tip">Tap to select or drag</span>
+            </div>
+            <div id="itemsGrid" class="items-grid" aria-label="Items available to pack"></div>
+          </div>
+
+          <!-- Central Backpack Dropzone -->
+          <div class="backpack-stage">
+            <div id="backpackDropzone" class="backpack-dropzone" tabindex="0" role="region" aria-label="Backpack drop target">
+              <div class="backpack-illu" id="backpackSvgHolder">
+                <!-- Inline SVG of the Coptic Adventure Backpack -->
+              </div>
+              <div class="backpack-prompt">
+                <span class="prompt-icon">⬇</span>
+                <span class="prompt-text">DROP HERE TO PACK</span>
+              </div>
+              <!-- Mini Badges of Packed Items -->
+              <div id="packedItemsTray" class="packed-items-tray" aria-label="Items packed in backpack"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="backpack-controls">
+          <button id="resetBackpackBtn" class="secondary-button" type="button">Start over <span aria-hidden="true">↻</span></button>
+          <button class="secondary-button" type="button" data-action="switch-to-game2">Switch to Game 2 <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAME 2: ZOOM-IN MYSTERY -->
+    <section id="game2View" class="view hidden-view" aria-labelledby="mysteryTitle">
+      <div class="game-nav-bar">
+        <button class="back-nav-btn" type="button" data-action="to-menu">
+          <span aria-hidden="true">←</span> Back to games
+        </button>
+        <div class="game-stat-group">
+          <div class="round-pill">
+            <span class="stat-label">ROUND</span>
+            <strong id="mysteryRoundDisplay">1 of 7</strong>
+          </div>
+          <div class="score-pill">
+            <span class="stat-label">SCORE</span>
+            <strong id="mysteryScoreDisplay">0 pts</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-container">
+        <div class="game-header-copy">
+          <span class="eyebrow">GAME 2 · VISUAL DEDUCTION</span>
+          <h2 id="mysteryTitle">Zoom-In Mystery</h2>
+          <p>Inspect the magnified symbol. What object is it, and what friendship virtue does it represent?</p>
+        </div>
+
+        <div class="mystery-stage">
+          <!-- Mystery Viewport -->
+          <div class="mystery-aperture-wrap">
+            <div class="mystery-frame">
+              <div id="mysteryViewport" class="mystery-viewport" aria-label="Magnified mystery object">
+                <div id="mysterySvgHolder" class="mystery-svg-holder">
+                  <!-- Injected SVG symbol with transform scale -->
+                </div>
+              </div>
+              <div class="magnifier-rim" aria-hidden="true"></div>
+            </div>
+
+            <!-- Zoom Hint Controls -->
+            <div class="zoom-controls-bar">
+              <button id="zoomOutBtn" class="zoom-out-btn" type="button">
+                <span class="zoom-icon">🔍</span>
+                <span class="zoom-label">Zoom Out (-50%)</span>
+                <span id="zoomCostBadge" class="zoom-badge">3 hints left</span>
+              </button>
+              <div class="zoom-level-indicator">
+                <span>ZOOM:</span>
+                <strong id="zoomLevelText">350%</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Answer & Feedback Area -->
+          <div class="mystery-interaction">
+            <div id="mysteryFeedback" class="mystery-feedback" role="status" aria-live="polite">
+              Select the matching object and friendship trait below:
+            </div>
+
+            <div id="mysteryChoicesGrid" class="mystery-choices-grid" role="radiogroup" aria-label="Friendship trait options">
+              <!-- Injected multiple choice buttons -->
+            </div>
+
+            <div id="mysteryRevealCard" class="mystery-reveal-card hidden">
+              <div class="reveal-head">
+                <span class="reveal-badge">CORRECT MATCH!</span>
+                <h3 id="revealTitle">Mirror: Honesty</h3>
+              </div>
+              <p id="revealDescription">Shows you the truth about yourself without lying or flattering.</p>
+              <button id="mysteryNextBtn" class="primary-button next-round-btn" type="button">
+                Next Round <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="./library.html">← All Sunday school games</a>
+    <span>Lesson based on <a href="https://bible.usccb.org/bible/1samuel/20" target="_blank" rel="noopener">1 Samuel 20</a>, <a href="https://bible.usccb.org/bible/1samuel/23" target="_blank" rel="noopener">23</a>, and <a href="https://bible.usccb.org/bible/sirach/6" target="_blank" rel="noopener">Sirach 6:14</a>.</span>
+  </footer>
+
+  <!-- DIALOG: TEACHER VIEW (QR Code) -->
+  <dialog id="teacherDialog" class="teacher-dialog" aria-labelledby="teacherTitle">
+    <div class="dialog-head">
+      <div>
+        <span class="eyebrow">FOR THE CLASSROOM · LESSON 06</span>
+        <h2 id="teacherTitle">Share this lesson</h2>
+      </div>
+      <button class="close-button" type="button" data-close aria-label="Close teacher view">×</button>
+    </div>
+    <p>Show this code on the classroom screen. Children scan it to open both friendship games directly on their phones.</p>
+    <img class="qr" src="./assets/true-friend-qr.svg" alt="QR code opening the True Friend games">
+    <a id="gameLink" class="game-link" href="./true-friend.html"></a>
+    <button id="copyButton" class="secondary-button" type="button">Copy game link</button>
+  </dialog>
+
+  <!-- DIALOG: MEMORY VERSE -->
+  <dialog id="verseDialog" class="verse-dialog" aria-labelledby="verseTitle">
+    <div class="dialog-head">
+      <div>
+        <span class="eyebrow">GOLDEN SCRIPTURE</span>
+        <h2 id="verseTitle">The Treasure of Friendship</h2>
+      </div>
+      <button class="close-button" type="button" data-close aria-label="Close dialog">×</button>
+    </div>
+    <div class="verse-box">
+      <span class="verse-quote-mark" aria-hidden="true">“</span>
+      <p class="verse-body">A faithful friend is a sturdy shelter: he that has found one has found a treasure.</p>
+      <span class="verse-cite">SIRACH 6:14</span>
+    </div>
+    <p class="verse-note">Jonathan was that shelter for David when King Saul was angry. He risked his royal position to defend his friend, because their covenant was rooted in God.</p>
+    <button class="primary-button dialog-continue" type="button" data-close>Got it <span aria-hidden="true">✓</span></button>
+  </dialog>
+
+  <!-- DIALOG: GAME 1 WIN -->
+  <dialog id="backpackWinDialog" class="win-dialog" aria-labelledby="backpackWinTitle">
+    <span class="win-mark" aria-hidden="true">✣</span>
+    <span class="eyebrow">BACKPACK FULLY PACKED!</span>
+    <h2 id="backpackWinTitle">You are a True Friend!</h2>
+    <div class="win-verse-card">
+      <p>“A faithful friend is a sturdy shelter: he that has found one has found a treasure.”</p>
+      <span>SIRACH 6:14</span>
+    </div>
+    <p>You packed all 7 faithful virtues and avoided the red flag traps. Just like Jonathan stood by David, you now know what makes a true Christian friend!</p>
+    <div class="win-actions">
+      <button id="winPlayMysteryBtn" class="primary-button" type="button">Play Game 2: Zoom-In Mystery <span aria-hidden="true">→</span></button>
+      <button id="winPackAgainBtn" class="secondary-button" type="button">Pack again <span aria-hidden="true">↻</span></button>
+      <button class="text-button" type="button" data-action="to-menu">Back to menu</button>
+    </div>
+  </dialog>
+
+  <!-- DIALOG: GAME 1 GAME OVER -->
+  <dialog id="backpackGameOverDialog" class="win-dialog game-over-dialog" aria-labelledby="gameOverTitle">
+    <span class="win-mark warning-mark" aria-hidden="true">⚠</span>
+    <span class="eyebrow">OUT OF LIVES</span>
+    <h2 id="gameOverTitle">Watch out for Red Flags!</h2>
+    <p>Gossip, bullying, and distractions can harm our faith and friendships. Try again to pack only the 7 true friend virtues!</p>
+    <div class="win-actions">
+      <button id="retryBackpackBtn" class="primary-button" type="button">Try again <span aria-hidden="true">↻</span></button>
+      <button class="secondary-button" type="button" data-action="to-menu">Back to menu</button>
+    </div>
+  </dialog>
+
+  <!-- DIALOG: GAME 2 WIN -->
+  <dialog id="mysteryWinDialog" class="win-dialog" aria-labelledby="mysteryWinTitle">
+    <span class="win-mark" aria-hidden="true">🏆</span>
+    <span class="eyebrow">MYSTERY SOLVED!</span>
+    <h2 id="mysteryWinTitle">Master Friend Detective!</h2>
+    <div class="score-summary-card">
+      <span class="final-score-number" id="finalScoreVal">700</span>
+      <span class="final-score-label">TOTAL POINTS</span>
+      <span class="final-score-badge" id="finalRankBadge">PERFECT SCORE · TRUE SHELTER!</span>
+    </div>
+    <p>You deduced all 7 friendship symbols and uncovered their deep biblical wisdom. Keep these virtues in your heart!</p>
+    <div class="win-actions">
+      <button id="mysteryPlayAgainBtn" class="primary-button" type="button">Play mystery again <span aria-hidden="true">↻</span></button>
+      <button id="mysteryToBackpackBtn" class="secondary-button" type="button">Pack the backpack <span aria-hidden="true">🎒</span></button>
+      <button class="text-button" type="button" data-action="to-menu">Back to menu</button>
+    </div>
+  </dialog>
+
+  <!-- Canvas for Confetti -->
+  <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+</body>
+</html>

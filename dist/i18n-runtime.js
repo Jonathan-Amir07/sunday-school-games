@@ -30,6 +30,10 @@
     if ((match = text.match(/^That belongs to (.+)\. (.+)$/))) return `ده من ${arabic(match[1])}. ${arabic(match[2])}`;
     if ((match = text.match(/^QR code that opens (.+)$/))) return `كود يفتح ${arabic(match[1])}`;
     if ((match = text.match(/^(\d+) of 5 moments are in the right place\. Look again at the story and try moving a card\.$/))) return `${match[1]} من 5 مواقف في مكانهم. بص على القصة تاني وحرّك كارت.`;
+    if ((match = text.match(/^(\d+) \/ (\d+) Packed$/))) return `${match[1]} من ${match[2]} في الشنطة`;
+    if ((match = text.match(/^(\d+) of (\d+)$/))) return `${match[1]} من ${match[2]}`;
+    if ((match = text.match(/^(\d+) pts$/))) return `${match[1]} نقطة`;
+    if ((match = text.match(/^(\d+) hints? left(?: \(.*?\))?$/))) return `فاضل ${match[1]} تلميحات`;
     return text;
   }
 
